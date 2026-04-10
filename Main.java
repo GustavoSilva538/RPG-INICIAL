@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Scanner;
 public class Main{
     public static void digitar(String texto) throws InterruptedException {
@@ -13,12 +14,16 @@ public class Main{
 
         Scanner sc = new Scanner(System.in);
         int vidaPlayer = 100;
+        int vidaMaximaPlayer = 100;
         int danoPlayer = 20;
         int cura = 30;
         int quantidadeCura = 4;
 
         int vidaEsqueleto = 60;
         int danoEsqueleto = 15;
+        int qunadoTomarDanoEsqueleto = danoEsqueleto;
+        int round = 1;
+        boolean tomouDano = false;
 
         digitar("\033[1;35m🎮⚔️ \033[1;31mBLOODIVINE \033[1;33mINICIANDO...\033[0m \033[1;36mPrepare-se para a batalha! ⚔️🎮\033[0m");
         Thread.sleep(3000);
@@ -26,9 +31,15 @@ public class Main{
 
 
         while(vidaPlayer > 0 && vidaEsqueleto > 0){
+            System.out.println("Round: " + round);
             System.out.println("--------------------");
-            System.out.println("\033[32m❤\uFE0FSua Vida: " + vidaPlayer + "\033[0m");
-            System.out.println("\033[31m\uD83D\uDC7EVida Esqueleto: " + vidaEsqueleto + "\033[0m");
+            if (tomouDano){
+                System.out.println("\033[32m❤\uFE0FSua Vida: " + vidaPlayer + "/" + vidaMaximaPlayer + "\033[31m" + " -" +  + qunadoTomarDanoEsqueleto + "\033[0m");
+            }else{
+                System.out.println("\033[32m❤\uFE0FSua Vida: " + vidaPlayer + "/" + vidaMaximaPlayer + "\033[0m");
+            }
+
+            System.out.println("\033[31m\uD83D\uDC7EVida Esqueleto: " + vidaEsqueleto );
             System.out.println("\033[34m\uD83D\uDCE6Curas disponiveis: " + quantidadeCura + "\033[0m");
             System.out.println("--------------------");
             System.out.println("Escolha sua ação:");
@@ -41,6 +52,7 @@ public class Main{
                 System.out.println();
             }
                 digitar("\u274CEscolha Inválida");
+                tomouDano = false;
                 sc.next();
                 Thread.sleep(1000);
                 for (int i = 0; i < 50; i++) {
@@ -56,6 +68,7 @@ public class Main{
             if (escolha == 1 ){
                 vidaEsqueleto -= danoPlayer;
                 vidaPlayer -= danoEsqueleto;
+                tomouDano = true;
                 digitar("⚔\uFE0F Você atacou o Esqueleto!");
                 digitar("\uD83D\uDCA5 O Esqueleto contra-atacou!");
             } else if (escolha == 2) {
@@ -66,23 +79,28 @@ public class Main{
 
                 vidaPlayer += cura;
                 vidaPlayer -= danoEsqueleto;
+                tomouDano = true;
                 quantidadeCura--;
                 digitar("\uD83D\uDC9AVocê se curou!");
-                digitar("O Esqueleto te atacou");
+                digitar("\uD83D\uDCA5O Esqueleto te atacou");
                 if (vidaPlayer > 100){
                     vidaPlayer = 100;
                 }
+                round++;
             }else {
                 for (int i = 0; i < 50; i++) {
                     System.out.println();
                 }
                 digitar("\u274CEscolha inválida");
+                tomouDano = false;
+                digitar("Digite o número da ação que vc deseja executar");
             }
             Thread.sleep(2500);
 
             for (int i = 0; i < 50; i++) {
                 System.out.println();
             }
+
         }
 
 
