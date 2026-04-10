@@ -37,10 +37,18 @@ public class Main{
             System.out.println("Opção:");
 
             if (!sc.hasNextInt()){
-                System.out.println("\u274CEscolha Inválida");
+                for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+                digitar("\u274CEscolha Inválida");
                 sc.next();
+                Thread.sleep(1000);
+                for (int i = 0; i < 50; i++) {
+                    System.out.println();
+                }
                 continue;
             }
+
 
 
             int escolha = sc.nextInt();
@@ -65,7 +73,10 @@ public class Main{
                     vidaPlayer = 100;
                 }
             }else {
-                System.out.println("\u274CEscolha inválida");
+                for (int i = 0; i < 50; i++) {
+                    System.out.println();
+                }
+                digitar("\u274CEscolha inválida");
             }
             Thread.sleep(2500);
 
