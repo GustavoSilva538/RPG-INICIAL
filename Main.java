@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.Scanner;
 public class Main{
 
@@ -16,6 +17,7 @@ public class Main{
         System.out.println("Escolha sua ação:");
         System.out.println("1) ⚔\uFE0FAtacar");
         System.out.println("2) \uD83E\uDDEACurar");
+        System.out.println("3) Status");
         System.out.println("Opção:");
     }
 
@@ -48,6 +50,7 @@ public class Main{
         int danoEsqueleto = 15;
         int round = 1;
         boolean tomouDano = false;
+        int danoAcumulado = 0;
 
 
         digitar("🎮⚔️ " + cores.vermelhoForte + "BLOODIVINE " + cores.amareloForte + "INICIANDO... " + cores.cianoForte + "Prepare-se para a batalha! ⚔️🎮" + cores.reset);
@@ -87,6 +90,7 @@ public class Main{
                     digitar("\uD83E\uDE78Dano recebido:" + cores.vermelho + " -" + danoEsqueleto + cores.reset);
                     Thread.sleep(2500);
                     round++;
+                    danoAcumulado += danoEsqueleto;
                     limparTela();
                     break;
                 case 2:
@@ -108,7 +112,19 @@ public class Main{
                         vidaPlayer = 100;
                     }
                     Thread.sleep(2500);
+                    danoAcumulado += danoEsqueleto;
                     round++;
+                    limparTela();
+                    break;
+
+                case 3:
+                    limparTela();
+                    System.out.println("------Status------");
+                    System.out.println("Dano básico: " + danoPlayer);
+                    System.out.println("Dano Critíco: " );
+                    System.out.println("Vida: " + vidaPlayer + "/" + vidaMaximaPlayer);
+                    System.out.println("Total dano recebido: " + danoAcumulado);
+                    Thread.sleep(3000);
                     limparTela();
                     break;
 
@@ -131,7 +147,7 @@ public class Main{
                 digitar("\uD83C\uDFC6Você venceu");
                 digitar("------Fim de Jogo-----");
             }
-        
+
             sc.close();
 
 
