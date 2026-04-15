@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main2 {
+public class Main3 {
 
     public static void digitar(String texto) throws InterruptedException {
         for (int i = 0; i < texto.length(); i++) {
